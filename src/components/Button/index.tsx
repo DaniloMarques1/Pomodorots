@@ -1,24 +1,23 @@
 import React from 'react';
 
-import {ButtonComponent} from './styles';
+import {ButtonComponent, ButtonLabel} from './styles';
 
 export interface ButtonProps {
   label: string;
   backgroundColor: string;
-  labelColor: string;
-  loading: boolean;
+  labelColor?: string;
+  loading?: boolean;
+  onPress: () => void;
 }
 
-function Button({label, backgroundColor, labelColor, loading}: ButtonProps) {
+//TODO: Como controlar o loading (acivity indicator)
+function Button({label, backgroundColor, labelColor, loading, onPress}: ButtonProps) {
   return (
     <ButtonComponent
-      loading={loading}
-      mode="contained"
-      color={backgroundColor}
-      labelStyle={{color: labelColor}}
-      accessibilityStates
-      onPress={() => console.log('Cliked')}>
-      {label}
+      backgroundColor={backgroundColor}
+      onPress={onPress}
+    >
+      <ButtonLabel labelColor={labelColor}>{label}</ButtonLabel>
     </ButtonComponent>
   );
 }

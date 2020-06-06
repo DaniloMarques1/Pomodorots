@@ -8,6 +8,7 @@ import {
 
 import {Colors} from './utils';
 import Button from './components/Button';
+import Input from './components/Input';
 
 const App = () => {
   return (
@@ -15,8 +16,13 @@ const App = () => {
       <StatusBar backgroundColor={Colors.PRIMARY_RED} />
       <View>
         <Text>Ola, mundo!</Text>
-        <Button labelColor={Colors.PRIMARY_WHITE} backgroundColor={Colors.PRIMARY_RED} label="Click" />
-      </View>     
+        <Button
+          backgroundColor={Colors.PRIMARY_RED}
+          label="Email"
+          onPress={() => console.log("Opa")}
+        />       
+      <Input error={false} placeholder="youremail@domain.com" label="Email" />
+      </View>
     </>
   );
 };
