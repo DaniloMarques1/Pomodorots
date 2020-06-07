@@ -9,6 +9,8 @@ import Button from '../../components/Button';
 import {Colors} from '../../utils';
 import * as yup from 'yup';
 import {RegisterProps} from '../../routes';
+import {Http} from '../../services/http';
+import {Alert} from 'react-native';
 
 interface FormValues {
   name: string;
@@ -18,6 +20,7 @@ interface FormValues {
 }
 
 function Register(props: RegisterProps) {
+  const [loading, setLoading] = React.useState(false);
   const initialValues: FormValues = {
     name: '',
     email: '',
@@ -25,10 +28,23 @@ function Register(props: RegisterProps) {
     confirmPassword: '',
   };
 
-  function handleRegister(values: FormikValues) {
+  async function handleRegister(values: FormikValues) {
     //TODO: Handle request
     //TODO: navigate to login with the email
-    console.log(values);
+    setLoading(true);
+    try {
+      const response = await Http.post('/users', {
+        name: values.name,
+        email: values.email,
+        password: values.password
+      });
+      console.log(response.data);
+      props.navigation.navigate("Login", {email: values.email});
+    } catch(e) {
+      const message = e.response ? e.response.data.error : "Check your interent connection";
+      Alert.alert("Error", message);
+    }
+    setLoading(false);
   }
   
   const validationForm = yup.object().shape({
@@ -103,6 +119,7 @@ function Register(props: RegisterProps) {
                 label="Register"
                 onPress={props.handleSubmit}
                 backgroundColor={Colors.PRIMARY_RED}
+                loading={loading}
               />
             </ViewButton>
           </>

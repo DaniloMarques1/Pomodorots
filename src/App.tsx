@@ -13,12 +13,16 @@ import {Colors} from './utils';
 //import Input from './components/Input';
 //import PomodoroCard from './components/PomodoroCard';
 import Route from './routes';
+import {Provider} from 'react-redux';
+import store from './store/index';
 
 const App = () => {
   return (
     <>
       <StatusBar backgroundColor={Colors.PRIMARY_RED} />
-      <Route />
+      <Provider store={store}>
+        <Route />
+      </Provider>
     </>
   );
 };

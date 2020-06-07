@@ -16,10 +16,11 @@ export const ButtonLabel = styled.Text`
   font-weight: bold;
   color: ${(props: ButtonProps) => props.labelColor ? props.labelColor : "#fff"};
   text-align: center;
-  margin-left: 15px;
 `;
 
 export const Loading = styled.ActivityIndicator.attrs(() => ({
   size: 'small',
   color: Colors.PRIMARY_WHITE
-}))``;
+}))`
+  margin-right: 20px;
+`;
