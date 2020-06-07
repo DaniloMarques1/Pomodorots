@@ -8,6 +8,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import {Colors} from '../../utils';
 import * as yup from 'yup';
+import {RegisterProps} from '../../routes';
 
 interface FormValues {
   name: string;
@@ -16,7 +17,7 @@ interface FormValues {
   confirmPassword: string;
 }
 
-function Register() {
+function Register(props: RegisterProps) {
   const initialValues: FormValues = {
     name: '',
     email: '',

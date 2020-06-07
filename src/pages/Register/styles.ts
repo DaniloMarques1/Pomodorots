@@ -3,7 +3,7 @@ import {Colors} from '../../utils';
 
 export const Container = styled.KeyboardAvoidingView`
   background-color: ${Colors.PRIMARY_WHITE};
-  padding: 10px;
+  padding: 10px 20px;
   flex: 1;
 `;
 
