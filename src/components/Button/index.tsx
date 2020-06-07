@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {ButtonComponent, ButtonLabel} from './styles';
+import {ButtonComponent, ButtonLabel, Loading} from './styles';
+import {ActivityIndicator} from 'react-native';
 
 export interface ButtonProps {
   label: string;
@@ -17,6 +18,9 @@ function Button({label, backgroundColor, labelColor, loading, onPress}: ButtonPr
       backgroundColor={backgroundColor}
       onPress={onPress}
     >
+    {loading && (
+     <Loading /> 
+    )}
       <ButtonLabel labelColor={labelColor}>{label}</ButtonLabel>
     </ButtonComponent>
   );

@@ -4,8 +4,7 @@ import {Colors} from '../../utils';
 export const Container = styled.KeyboardAvoidingView`
   background-color: ${Colors.PRIMARY_WHITE};
   flex: 1;
-  margin-top: 60px;
-  padding: 20px;
+  padding: 60px 20px 0px 20px;
 `;
 
 export const Logo = styled.Image`
