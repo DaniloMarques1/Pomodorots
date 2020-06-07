@@ -9,7 +9,7 @@ export interface InputProps {
   secureTextEntry?: boolean;
   error: boolean;
   value: string;
-  onChangeText: () => void;
+  onChangeText: (field: string) => void;
 }
 
 function Input({
