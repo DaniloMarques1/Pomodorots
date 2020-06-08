@@ -11,6 +11,7 @@ import {Colors} from '../utils';
 import Login from '../pages/Login';
 import LoginParams from '../pages/Login/routeParams';
 import Register from '../pages/Register';
+import Home from '../pages/Home';
 
 type TabProps = {
   Login: LoginParams;

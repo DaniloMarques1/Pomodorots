@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/bottom-tabs": "^5.5.2",
     "@react-navigation/native": "^5.5.1",
@@ -32,7 +33,6 @@
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^1.0.0",
-    "@types/": "react-navigation/native",
     "@types/axios": "^0.14.0",
     "@types/jest": "^24.0.24",
     "@types/react-native": "^0.62.0",
