@@ -6,6 +6,7 @@ import {
   BottomTabScreenProps,
 } from '@react-navigation/bottom-tabs';
 import {Colors} from '../utils';
+import {navigationRef} from './rootNavigation';
 
 /* Pages */
 import Login from '../pages/Login';
@@ -26,7 +27,7 @@ const Tab = createBottomTabNavigator<TabProps>();
 function Route() {
   //TODO: Check if we have a token
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Tab.Navigator
         tabBarOptions={{
           tabStyle: {
@@ -39,6 +40,7 @@ function Route() {
         }}>
         <Tab.Screen name="Login" component={Login} />
         <Tab.Screen name="Register" component={Register} />
+        <Tab.Screen name="Home" component={Home} />
       </Tab.Navigator>
     </NavigationContainer>
   );

@@ -6,7 +6,8 @@ import {loginSuccess, loginFailure} from './action'
 import {pomodoroRequest} from '../Pomodoros/action';
 import {Alert} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import { navigate } from '../../../routes/rootNavigation';
+ 
 function* loginSaga(action: LoginRequestAction) {
   try {
     const {email, password} = action;
@@ -15,8 +16,8 @@ function* loginSaga(action: LoginRequestAction) {
     console.log(token);
     yield put(loginSuccess(token));
     yield call(AsyncStorage.setItem, "pomodoro", token); // save the token to use later
-    //TODO: Navigate to home and disptach action to fetch pomodoros
     yield put (pomodoroRequest(token));
+    navigate("Home");
   } catch(e) {
     yield put(loginFailure());
     const message = e.response.data.error || "Check your internet connection";
