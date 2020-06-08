@@ -9,9 +9,10 @@ import {Formik, FormikProps, FormikValues} from 'formik';
 import {Colors} from '../../utils';
 import * as yup from 'yup';
 import ErrorView from '../../components/ErrorView';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {LoginState} from '../../store/modules/Login/reducer';
 import {LoginProps} from '../../routes/index'
+import {loginRequest} from '../../store/modules/Login/action';
 
 interface FormValues {
   email: string;
@@ -23,15 +24,13 @@ interface LoginReducer {
 }
 
 function Login(props: LoginProps) {
-  //TODO: email será passado da tela de registro
+  const dispatch = useDispatch();
   const email = props.route.params?.email ? props.route.params.email : "";
-  console.log(email);
   const initialValues: FormValues = {email, password: ""};
   const state = useSelector((state: LoginReducer) => state.loginReducer);
-  
+
   function handleSubmit(values: FormikValues) {
-    //TODO: requisicao para obtenção do famigerado TOKEN
-    console.log(values);
+    dispatch(loginRequest(values.email, values.password));
   }
 
   const validationForm = yup.object().shape({

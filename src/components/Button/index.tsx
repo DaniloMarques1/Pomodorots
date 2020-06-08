@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {ButtonComponent, ButtonLabel, Loading} from './styles';
-import {ActivityIndicator} from 'react-native';
 
 export interface ButtonProps {
   label: string;

@@ -38,10 +38,10 @@ function Register(props: RegisterProps) {
         email: values.email,
         password: values.password
       });
-      console.log(response.data);
+      console.log(response);
       props.navigation.navigate("Login", {email: values.email});
     } catch(e) {
-      const message = e.response ? e.response.data.error : "Check your interent connection";
+      const message = e.response ? e.response.data.error : "Check your internet connection";
       Alert.alert("Error", message);
     }
     setLoading(false);

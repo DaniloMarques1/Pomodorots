@@ -6,6 +6,7 @@ import {
   BottomTabScreenProps,
 } from '@react-navigation/bottom-tabs';
 import {Colors} from '../utils';
+
 /* Pages */
 import Login from '../pages/Login';
 import LoginParams from '../pages/Login/routeParams';

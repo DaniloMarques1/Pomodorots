@@ -30,7 +30,6 @@ function Input({
         onChangeText={onChangeText}
         placeholderTextColor={Colors.PRIMARY_GRAY}
         placeholder={placeholder}
-        theme={{colors: {underlineColor: 'transparent'}}}
       />
     </>
   );
