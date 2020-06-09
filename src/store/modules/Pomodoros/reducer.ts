@@ -33,6 +33,7 @@ const initialState: StateInterface = {loading: false};
 export default function reducer(state = initialState, action: PomodoroActions): StateInterface {
   switch (action.type) {
     case POMODOROS_REQUEST: {
+      console.log("Request!!!");
       return {...state, loading:true};
     }
     case POMODOROS_FAILURE: {

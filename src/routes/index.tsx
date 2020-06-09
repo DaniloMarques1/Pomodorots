@@ -12,6 +12,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Store} from '../store/modules/types';
 import {loginSuccess} from '../store/modules/Login/action';
 import {pomodoroRequest} from '../store/modules/Pomodoros/action';
+
 /* Pages */
 import Login         from '../pages/Login';
 import LoginParams   from '../pages/Login/routeParams';
@@ -62,10 +63,10 @@ function Route() {
         tabBarOptions={{
           tabStyle: {
             justifyContent: 'center',
-            backgroundColor: Colors.PRIMARY_RED,
+            backgroundColor: Colors.PRIMARY_GREEN,
           },
-          labelStyle: {fontSize: 16, fontWeight: 'bold'},
-          activeTintColor: Colors.SECONDARY_GREEN,
+          labelStyle: {fontSize: 17},
+          activeTintColor: Colors.PRIMARY_RED,
           inactiveTintColor: Colors.PRIMARY_WHITE,
         }}>
         {state.token === null ? (
