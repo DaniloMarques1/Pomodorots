@@ -10,24 +10,20 @@ import {Colors} from '../../utils';
 import * as yup from 'yup';
 import ErrorView from '../../components/ErrorView';
 import {useSelector, useDispatch} from 'react-redux';
-import {LoginState} from '../../store/modules/Login/reducer';
 import {LoginProps} from '../../routes/index'
 import {loginRequest} from '../../store/modules/Login/action';
+import {Store} from '../../store/modules/types';
 
 interface FormValues {
   email: string;
   password: string;
 }
 
-interface LoginReducer {
-  loginReducer: LoginState;
-}
-
 function Login(props: LoginProps) {
   const dispatch = useDispatch();
   const email = props.route.params?.email ? props.route.params.email : "";
   const initialValues: FormValues = {email, password: ""};
-  const state = useSelector((state: LoginReducer) => state.loginReducer);
+  const state = useSelector((state: Store) => state.loginReducer);
 
   function handleSubmit(values: FormikValues) {
     dispatch(loginRequest(values.email, values.password));

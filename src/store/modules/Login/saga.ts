@@ -13,7 +13,6 @@ function* loginSaga(action: LoginRequestAction) {
     const {email, password} = action;
     const response = yield call(Http.post, '/session', {email, password});
     const {token} = response.data;
-    console.log(token);
     yield put(loginSuccess(token));
     yield call(AsyncStorage.setItem, "pomodoro", token); // save the token to use later
     yield put (pomodoroRequest(token));
