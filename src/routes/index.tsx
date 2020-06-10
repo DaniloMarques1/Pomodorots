@@ -66,14 +66,16 @@ function Route() {
 
             if (route.name === "Home") {
               name = "home";
-            }
-            else if (route.name === "Profile") {
+            } else if (route.name === "Profile") {
               name = 'account-circle';
-            }
-            else {
+            } else if (route.name === "AddPomodoro") {
               name = "note-add";
+            } else if (route.name === "Login") {
+              name = "person";
+            } else {
+              name = "person-add";
             }
-
+            
             return <Icon name={name} size={23} color={color} />
           },
         })}

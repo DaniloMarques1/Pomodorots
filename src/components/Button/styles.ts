@@ -4,6 +4,10 @@ import {Colors} from '../../utils';
 
 export const ButtonComponent = styled.TouchableOpacity`
   background-color: ${(props: ButtonProps) => props.backgroundColor}; 
+  border: 2px solid  ${(props: ButtonProps) =>
+    props.backgroundColor === Colors.PRIMARY_RED
+      ? Colors.PRIMARY_RED
+      : Colors.PRIMARY_GREEN}
   height: 40px;
   border-radius: 6px;
   flex-direction: row;

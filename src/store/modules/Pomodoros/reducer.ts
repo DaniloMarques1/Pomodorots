@@ -11,17 +11,13 @@ export interface Pomodoro {
   __v: number; // is this relevant?
 }
 
-export interface User {
-  _id: string;
-  name: string;
-  email: string;
-  password: string;
-  __v: string; // relevant?
-}
-
 export interface PomodoroPayload {
   tasks?: Array<Pomodoro>;
-  user?: User;
+  _id?: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  __v?: string; // relevant?
 }
 
 export interface StateInterface extends PomodoroPayload {
