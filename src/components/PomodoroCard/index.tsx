@@ -33,10 +33,10 @@ function PomodoroCard({title, finished, total}: CardProps) {
       </TitleQtdView>
       <IconView>
         <IconButton>
-          <Icon name="play-arrow" color={Colors.PRIMARY_RED} size={30} />
+          <Icon name="keyboard-arrow-right" color={Colors.PRIMARY_RED} size={35} />
         </IconButton>
         <IconButton>
-          <Icon name="delete" color={Colors.PRIMARY_RED} size={30} />
+          <Icon name="delete" color={Colors.PRIMARY_RED} size={28} />
         </IconButton>
       </IconView>
     </Container>

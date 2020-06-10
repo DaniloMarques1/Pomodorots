@@ -21,6 +21,6 @@ export const Title = styled.Text`
 
 export const Logo = styled.Image`
   margin-left: auto;
-  height: 80px;
-  width: 80px;
+  height: 70px;
+  width: 70px;
 `;

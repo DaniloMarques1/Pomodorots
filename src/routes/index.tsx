@@ -12,6 +12,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Store} from '../store/modules/types';
 import {loginSuccess} from '../store/modules/Login/action';
 import {pomodoroRequest} from '../store/modules/Pomodoros/action';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 /* Pages */
 import Login         from '../pages/Login';
@@ -59,6 +60,23 @@ function Route() {
   return (
     <NavigationContainer ref={navigationRef}>
       <Tab.Navigator
+        screenOptions={({route}) => ({
+          tabBarIcon: ({color}) => {
+            let name = "";
+
+            if (route.name === "Home") {
+              name = "home";
+            }
+            else if (route.name === "Profile") {
+              name = 'account-circle';
+            }
+            else {
+              name = "note-add";
+            }
+
+            return <Icon name={name} size={23} color={color} />
+          },
+        })}
         lazy={true}
         tabBarOptions={{
           tabStyle: {
@@ -76,9 +94,9 @@ function Route() {
           </>
         ) : (
           <>
-            <Tab.Screen name="Home"        component={Home} />
-            <Tab.Screen name="Profile"     component={Profile} />
-            <Tab.Screen name="AddPomodoro" component={AddPomodoro} />
+            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Profile" component={Profile} />
+            <Tab.Screen name="AddPomodoro" component={AddPomodoro} options={() => ({title: "Add"})} />
           </>
         )}
       </Tab.Navigator>

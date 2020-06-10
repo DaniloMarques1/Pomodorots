@@ -39,5 +39,6 @@ export const IconView = styled.View`
 
 export const IconButton = styled.TouchableOpacity`
   margin: 0 20px;
+  margin-top: 10px;
 `;
 
