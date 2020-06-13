@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 import {Container, Title, Header, Logo, Form, Label, ViewInput, ViewButton} from './styles';
 import {useSelector, useDispatch} from 'react-redux';
@@ -23,10 +23,13 @@ function Profile() {
   const dispatch =  useDispatch();
   const initialValues: FormValues = {newPassword: "", currentPassword: ""};
 
-
   async function handleLogout() {
     await AsyncStorage.removeItem("pomodoro");
     dispatch(logout());
+  }
+
+  function handleChangePassowrd(values: FormikValues) {
+    //TODO: Handle change password request
   }
 
   const validationForm = yup.object().shape({
