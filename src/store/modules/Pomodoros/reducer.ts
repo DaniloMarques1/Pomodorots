@@ -1,4 +1,12 @@
-import {PomodoroActions, POMODOROS_FAILURE, POMODOROS_REQUEST, POMODOROS_SUCCESS} from './types';
+import {
+  PomodoroActions,
+  POMODOROS_FAILURE,
+  POMODOROS_REQUEST,
+  POMODOROS_SUCCESS,
+  CHANGE_PASSWORD_REQUEST,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAILURE
+} from './types';
 
 export interface Pomodoro {
   _id: string;
@@ -29,7 +37,6 @@ const initialState: StateInterface = {loading: false};
 export default function reducer(state = initialState, action: PomodoroActions): StateInterface {
   switch (action.type) {
     case POMODOROS_REQUEST: {
-      console.log("Request!!!");
       return {...state, loading:true};
     }
     case POMODOROS_FAILURE: {
@@ -37,6 +44,15 @@ export default function reducer(state = initialState, action: PomodoroActions): 
     }
     case POMODOROS_SUCCESS: {
       return {...action.payload, loading: false};
+    }
+    case CHANGE_PASSWORD_REQUEST: {
+      return {...state, loading: true};
+    }
+    case CHANGE_PASSWORD_SUCCESS: {
+      return {loading: false, ...action.payload};
+    }
+    case CHANGE_PASSWORD_FAILURE: {
+      return {...state, loading: false};
     }
     default:
       return state;

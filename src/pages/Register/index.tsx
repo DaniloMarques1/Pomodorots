@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Container, Logo, ViewInput, ViewButton} from './styles';
 import TomatoLogo from '../../assets/tomato.png';
-import {Formik, FormikValues, FormikProps} from 'formik';
+import {Formik, FormikValues, FormikProps, FormikHelpers} from 'formik';
 import ErrorView from '../../components/ErrorView';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -28,17 +28,15 @@ function Register(props: RegisterProps) {
     confirmPassword: '',
   };
 
-  async function handleRegister(values: FormikValues) {
-    //TODO: Handle request
-    //TODO: navigate to login with the email
+  async function handleRegister(values: FormikValues, helpers: FormikHelpers<FormValues>) {
     setLoading(true);
     try {
-      const response = await Http.post('/users', {
+      await Http.post('/users', {
         name: values.name,
         email: values.email,
         password: values.password
       });
-      console.log(response);
+      helpers.resetForm({});
       props.navigation.navigate("Login", {email: values.email});
     } catch(e) {
       const message = e.response ? e.response.data.error : "Check your internet connection";
@@ -65,7 +63,7 @@ function Register(props: RegisterProps) {
       <Logo source={TomatoLogo} />
       <Formik
         initialValues={initialValues}
-        onSubmit={(values: FormikValues) => handleRegister(values)}
+        onSubmit={(values: FormikValues, helpers: FormikHelpers<FormValues>) => handleRegister(values, helpers)}
         validateOnMount={false}
         validateOnChange={false}
         validationSchema={validationForm}

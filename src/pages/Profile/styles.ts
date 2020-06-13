@@ -26,9 +26,9 @@ export const Title = styled.Text`
 export const Form = styled.View`
   background-color: ${Colors.PRIMARY_WHITE};
   width: 90%;
-  height: 350px;
+  height: 370px;
   border-radius: 20px;
-  padding: 10px;
+  padding: 12px;
 `;
 
 export const Label = styled.Text`

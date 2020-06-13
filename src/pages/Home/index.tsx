@@ -17,6 +17,7 @@ function HeaderComponent() {
   );
 }
 
+//TODO: Loading vai aparecer em qualquer tela caso o loading seja alterado
 function Home() {
   const state = useSelector((state: Store) => state);
 

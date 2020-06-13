@@ -10,8 +10,9 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import ErrorView from '../../components/ErrorView';
 import * as yup from 'yup';
-import {Formik, FormikProps, FormikValues} from 'formik';
+import {Formik, FormikProps, FormikValues, FormikHelpers} from 'formik';
 import {Colors} from '../../utils';
+import {changePasswordRequest} from '../../store/modules/Pomodoros/action';
 
 interface FormValues {
   currentPassword: string;
@@ -19,17 +20,21 @@ interface FormValues {
 }
 
 function Profile() {
-  const state    = useSelector((state: Store) => state.pomodoroReducer);
+  const state    = useSelector((state: Store) => state);
   const dispatch =  useDispatch();
   const initialValues: FormValues = {newPassword: "", currentPassword: ""};
 
   async function handleLogout() {
     await AsyncStorage.removeItem("pomodoro");
     dispatch(logout());
+    //TODO: dispatch um pomodoro clear
   }
 
-  function handleChangePassowrd(values: FormikValues) {
-    //TODO: Handle change password request
+  function handleChangePassword(values: FormikValues, helpers: FormikHelpers<FormValues>) {
+    if (state.loginReducer.token)
+      dispatch(changePasswordRequest(values.currentPassword, values.newPassword, state.loginReducer.token));
+
+    helpers.resetForm({});
   }
 
   const validationForm = yup.object().shape({
@@ -41,11 +46,14 @@ function Profile() {
     <Container>
       <Header>
         <Logo source={TomatoLogo} />
-        <Title>Hello, {state.name}!</Title>
+        <Title>Hello, {state.pomodoroReducer.name?.split(' ')[0]}!</Title>
       </Header>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values: FormikValues) => console.log(values)}
+        onSubmit={(
+          values: FormikValues,
+          helpers: FormikHelpers<FormValues>,
+        ) => handleChangePassword(values, helpers)}
         validateOnMount={false}
         validateOnChange={false}
         validationSchema={validationForm}>
