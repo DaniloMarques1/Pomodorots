@@ -3,11 +3,14 @@ import {
   POMODOROS_REQUEST,
   POMODOROS_SUCCESS,
   POMODOROS_FAILURE,
+  ADD_POMODOROS_REQUEST,
+  ADD_POMODOROS_SUCCESS,
+  ADD_POMODOROS_FAILURE,
   CHANGE_PASSWORD_REQUEST,
   CHANGE_PASSWORD_SUCCESS,
-  CHANGE_PASSWORD_FAILURE
-} from './types';
-import {PomodoroPayload} from './reducer';
+  CHANGE_PASSWORD_FAILURE,
+  } from './types';
+import {PomodoroPayload, Pomodoro} from './reducer';
 
 export function pomodoroRequest(token: string): PomodoroActions {
   return {
@@ -48,5 +51,27 @@ export function changePasswordSuccess(payload: PomodoroPayload): PomodoroActions
 export function changePasswordFailure(): PomodoroActions {
   return {
     type: CHANGE_PASSWORD_FAILURE
+  }
+}
+
+export function addPomodoroRequest(token: string, title: string, qtdPomodoros: number): PomodoroActions {
+  return {
+    type: ADD_POMODOROS_REQUEST,
+    token,
+    title,
+    qtdPomodoros
+  }
+}
+
+export function addPomodoroSuccess(pomodoro: Pomodoro): PomodoroActions {
+  return {
+    type: ADD_POMODOROS_SUCCESS,
+    pomodoro
+  }
+}
+
+export function addPomodoroFailure(): PomodoroActions {
+  return {
+    type: ADD_POMODOROS_FAILURE
   }
 }

@@ -3,6 +3,9 @@ import {
   POMODOROS_FAILURE,
   POMODOROS_REQUEST,
   POMODOROS_SUCCESS,
+  ADD_POMODOROS_REQUEST,
+  ADD_POMODOROS_SUCCESS,
+  ADD_POMODOROS_FAILURE,
   CHANGE_PASSWORD_REQUEST,
   CHANGE_PASSWORD_SUCCESS,
   CHANGE_PASSWORD_FAILURE
@@ -44,6 +47,18 @@ export default function reducer(state = initialState, action: PomodoroActions): 
     }
     case POMODOROS_SUCCESS: {
       return {...action.payload, loading: false};
+    }
+    case ADD_POMODOROS_REQUEST: {
+      return {...state, loading: true};
+    }
+    case ADD_POMODOROS_SUCCESS: {
+      const tasks = state.tasks?.slice(0);
+      tasks?.push(action.pomodoro);
+
+      return {...state, loading: false, tasks};
+    }
+    case ADD_POMODOROS_FAILURE: {
+      return {...state, loading: false};
     }
     case CHANGE_PASSWORD_REQUEST: {
       return {...state, loading: true};

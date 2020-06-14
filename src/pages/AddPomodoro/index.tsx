@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Container, Form, InputView, ButtonView, Title, Header, Logo} from './styles';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {Formik,FormikValues, FormikProps, FormikHelpers} from 'formik';
 import {Store} from '../../store/modules/types';
 import Button from '../../components/Button';
@@ -9,6 +9,7 @@ import Input from '../../components/Input';
 import ErrorView from '../../components/ErrorView';
 import TomatoLogo from '../../assets/tomato.png';
 import * as yup from 'yup';
+import {addPomodoroRequest} from '../../store/modules/Pomodoros/action';
 
 interface FormValues {
   title: string;
@@ -17,11 +18,14 @@ interface FormValues {
 
 function AddPomodoro() {
   const initialValues: FormValues = {title: "", qtdPomodoros: ""};
-  const state = useSelector((state: Store) => state);
+  const state                     = useSelector((state: Store) => state);
+  const dispatch                  = useDispatch();
 
   function handleCreate(values: FormikValues, helpers: FormikHelpers<FormValues>) {
     //TODO: dispatch a create action
     helpers.resetForm({});
+    if (state.loginReducer.token)
+      dispatch(addPomodoroRequest(state.loginReducer.token, values.title, values.qtdPomodoros));
   }
 
   const validationForm = yup.object().shape({
