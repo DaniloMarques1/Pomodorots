@@ -116,7 +116,6 @@ function Register(props: RegisterProps) {
               <Button
                 label="Register"
                 onPress={props.handleSubmit}
-                backgroundColor={Colors.PRIMARY_RED}
                 loading={loading}
               />
             </ViewButton>

@@ -78,7 +78,6 @@ function Login(props: LoginProps) {
               <Button
                 label="Login"
                 onPress={props.handleSubmit}
-                backgroundColor={Colors.PRIMARY_RED}
                 loading={state.loading}
               />
             </ViewButton>

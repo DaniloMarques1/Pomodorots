@@ -6,7 +6,8 @@ export const Container = styled.View`
   height: 80px;
   border-radius: 10px;
   padding: 10px;
-  elevation: 20;
+  elevation: 10;
+  margin-bottom: 12px;
 `;
 
 export const TitleQtdView = styled.View`

@@ -4,7 +4,7 @@ import {ButtonComponent, ButtonLabel, Loading} from './styles';
 
 export interface ButtonProps {
   label: string;
-  backgroundColor: string;
+  backgroundColor?: string;
   labelColor?: string;
   loading?: boolean;
   onPress: () => void;

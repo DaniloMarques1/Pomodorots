@@ -10,6 +10,7 @@ export interface InputProps {
   error: boolean;
   value: string;
   onChangeText: (field: string) => void;
+  keyboardType?: string;
 }
 
 function Input({
@@ -18,6 +19,7 @@ function Input({
   label,
   placeholder,
   secureTextEntry,
+  keyboardType,
   error,
 }: InputProps) {
   return (
@@ -30,6 +32,7 @@ function Input({
         onChangeText={onChangeText}
         placeholderTextColor={Colors.PRIMARY_GRAY}
         placeholder={placeholder}
+        keyboardType={keyboardType}
       />
     </>
   );

@@ -86,7 +86,6 @@ function Profile() {
               <Button
                 label="Change password"
                 onPress={props.handleSubmit}
-                backgroundColor={Colors.PRIMARY_RED}
               />
             </ViewButton>
             <ViewButton>

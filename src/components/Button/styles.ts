@@ -3,11 +3,11 @@ import {ButtonProps} from './index'
 import {Colors} from '../../utils';
 
 export const ButtonComponent = styled.TouchableOpacity`
-  background-color: ${(props: ButtonProps) => props.backgroundColor}; 
+  background-color: ${(props: ButtonProps) => props.backgroundColor || Colors.PRIMARY_RED}; 
   border: 2px solid  ${(props: ButtonProps) =>
-    props.backgroundColor === Colors.PRIMARY_RED
-      ? Colors.PRIMARY_RED
-      : Colors.PRIMARY_GREEN}
+    props.backgroundColor
+      ? Colors.PRIMARY_GREEN
+      : Colors.PRIMARY_RED}
   height: 40px;
   border-radius: 6px;
   flex-direction: row;
