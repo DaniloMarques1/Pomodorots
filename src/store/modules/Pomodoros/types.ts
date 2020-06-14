@@ -6,6 +6,9 @@ export const POMODOROS_FAILURE       = "POMODOROS_FAILURE";
 export const ADD_POMODOROS_REQUEST   = "ADD_POMODOROS_REQUEST";
 export const ADD_POMODOROS_SUCCESS   = "ADD_POMODOROS_SUCCESS";
 export const ADD_POMODOROS_FAILURE   = "ADD_POMODOROS_FAILURE";
+export const DELETE_POMODORO_REQUEST = "DELETE_POMODORO_REQUEST";
+export const DELETE_POMODORO_SUCCESS = "DELETE_POMODORO_SUCCESS";
+export const DELETE_POMODORO_FAILURE = "DELETE_POMODORO_FAILURE";
 export const CHANGE_PASSWORD_REQUEST = "CHANGE_PASSWORD_REQUEST";
 export const CHANGE_PASSWORD_SUCCESS = "CHANGE_PASSWORD_SUCCESS";
 export const CHANGE_PASSWORD_FAILURE = "CHANGE_PASSWORD_FAILURE";
@@ -40,6 +43,21 @@ export interface AddPomodoroFailureAction {
   type: typeof ADD_POMODOROS_FAILURE;
 }
 
+export interface DeletePomodoroRequestAction {
+  type: typeof DELETE_POMODORO_REQUEST,
+  id: string;
+  token: string;
+}
+
+export interface DeletePomodoroSucessAction {
+  type: typeof DELETE_POMODORO_SUCCESS;
+  pomodoro: Pomodoro;
+}
+
+export interface DeletePomodoroFailureAction {
+  type: typeof DELETE_POMODORO_FAILURE;
+}
+
 export interface ChangePasswordRequestAction {
   type: typeof CHANGE_PASSWORD_REQUEST;
   token: string;
@@ -57,5 +75,16 @@ export interface ChangePasswordFailureAction {
 }
 
 
-export type PomodoroActions = PomodoroRequestAction | PomodoroSuccessAction | PomodoroFailureAction |
-                               ChangePasswordRequestAction | ChangePasswordSuccessAction | ChangePasswordFailureAction | AddPomodorosRequestAction | AddPomodoroSuccessAction | AddPomodoroFailureAction;
+export type PomodoroActions =
+  | PomodoroRequestAction
+  | PomodoroSuccessAction
+  | PomodoroFailureAction
+  | ChangePasswordRequestAction
+  | ChangePasswordSuccessAction
+  | ChangePasswordFailureAction
+  | AddPomodorosRequestAction
+  | AddPomodoroSuccessAction
+  | AddPomodoroFailureAction
+  | DeletePomodoroRequestAction
+  | DeletePomodoroSucessAction
+  | DeletePomodoroFailureAction;

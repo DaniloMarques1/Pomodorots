@@ -1,12 +1,13 @@
 import React from 'react';
 
 import {Container, Title, Logo, Header} from './styles';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {Store} from '../../store/modules/types';
 import TomatoLogo from '../../assets/tomato.png';
 import PomodoroCard  from '../../components/PomodoroCard';
-import {FlatList} from 'react-native';
+import {FlatList, Alert} from 'react-native';
 import Loading from '../../components/Loading';
+import {deletePomodoroRequest} from '../../store/modules/Pomodoros/action'
 
 function HeaderComponent() {
   return (
@@ -19,7 +20,23 @@ function HeaderComponent() {
 
 //TODO: Loading vai aparecer em qualquer tela caso o loading seja alterado
 function Home() {
-  const state = useSelector((state: Store) => state);
+  const dispatch = useDispatch();
+  const state    = useSelector((state: Store) => state);
+
+  function handleDelete(id: string) {
+      Alert.alert('Warning', 'Are you sure you want to delete?', [
+        {
+          text: 'Yes',
+          onPress: () => dispatchDelete(id)
+        },
+        {text: 'No'},
+      ]);
+  }
+
+  function dispatchDelete(id: string) {
+    if (state.loginReducer.token)
+      dispatch(deletePomodoroRequest(state.loginReducer.token, id));
+  }
 
   return (
     <Container>
@@ -33,6 +50,7 @@ function Home() {
             title={item.title}
             total={item.qtdPomodoros}
             finished={item.finishedPomodoros}
+            handleDelete={() => handleDelete(item._id)}
           />
         )}
       />

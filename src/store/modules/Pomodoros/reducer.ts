@@ -8,7 +8,10 @@ import {
   ADD_POMODOROS_FAILURE,
   CHANGE_PASSWORD_REQUEST,
   CHANGE_PASSWORD_SUCCESS,
-  CHANGE_PASSWORD_FAILURE
+  CHANGE_PASSWORD_FAILURE,
+  DELETE_POMODORO_REQUEST,
+  DELETE_POMODORO_SUCCESS,
+  DELETE_POMODORO_FAILURE
 } from './types';
 
 export interface Pomodoro {
@@ -67,6 +70,19 @@ export default function reducer(state = initialState, action: PomodoroActions): 
       return {loading: false, ...action.payload};
     }
     case CHANGE_PASSWORD_FAILURE: {
+      return {...state, loading: false};
+    }
+    case DELETE_POMODORO_REQUEST: {
+      return {...state, loading: true};
+    }
+    case DELETE_POMODORO_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        tasks: state.tasks?.filter(task => task._id !== action.pomodoro._id)
+      }; 
+    }
+    case DELETE_POMODORO_FAILURE: {
       return {...state, loading: false};
     }
     default:

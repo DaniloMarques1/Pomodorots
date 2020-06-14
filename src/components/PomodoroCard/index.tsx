@@ -18,9 +18,10 @@ interface CardProps {
   title: string;
   finished: number;
   total: number;
+  handleDelete: (id: string) => void;
 }
 
-function PomodoroCard({title, finished, total}: CardProps) {
+function PomodoroCard({title, finished, total, handleDelete}: CardProps) {
   return (
     <Container>
       <TitleQtdView>
@@ -35,7 +36,7 @@ function PomodoroCard({title, finished, total}: CardProps) {
         <IconButton>
           <Icon name="keyboard-arrow-right" color={Colors.PRIMARY_RED} size={35} />
         </IconButton>
-        <IconButton>
+        <IconButton onPress={handleDelete}>
           <Icon name="delete" color={Colors.PRIMARY_RED} size={28} />
         </IconButton>
       </IconView>

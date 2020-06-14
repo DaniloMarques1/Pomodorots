@@ -6,6 +6,9 @@ import {
   ADD_POMODOROS_REQUEST,
   ADD_POMODOROS_SUCCESS,
   ADD_POMODOROS_FAILURE,
+  DELETE_POMODORO_REQUEST,
+  DELETE_POMODORO_SUCCESS,
+  DELETE_POMODORO_FAILURE,
   CHANGE_PASSWORD_REQUEST,
   CHANGE_PASSWORD_SUCCESS,
   CHANGE_PASSWORD_FAILURE,
@@ -73,5 +76,26 @@ export function addPomodoroSuccess(pomodoro: Pomodoro): PomodoroActions {
 export function addPomodoroFailure(): PomodoroActions {
   return {
     type: ADD_POMODOROS_FAILURE
+  }
+}
+
+export function deletePomodoroRequest(token: string, id: string): PomodoroActions {
+  return {
+    type: DELETE_POMODORO_REQUEST,
+    token,
+    id
+  }
+}
+
+export function deletePomodoroSuccess(pomodoro: Pomodoro): PomodoroActions {
+  return {
+    type: DELETE_POMODORO_SUCCESS,
+    pomodoro
+  }
+}
+
+export function deletePomodoroFailure(): PomodoroActions {
+  return {
+    type: DELETE_POMODORO_FAILURE,
   }
 }

@@ -3,6 +3,8 @@ import {all, put, call, takeLatest} from 'redux-saga/effects';
 import {
   POMODOROS_REQUEST,
   ADD_POMODOROS_REQUEST,
+  DELETE_POMODORO_REQUEST,
+  DeletePomodoroRequestAction,
   AddPomodorosRequestAction,
   PomodoroRequestAction,
   CHANGE_PASSWORD_REQUEST,
@@ -14,7 +16,9 @@ import {
   changePasswordSuccess,
   changePasswordFailure,
   addPomodoroFailure,
-  addPomodoroSuccess
+  addPomodoroSuccess,
+  deletePomodoroSuccess,
+  deletePomodoroFailure
 } from './action';
 import {Http} from '../../../services/http';
 import {Alert} from 'react-native';
@@ -77,8 +81,24 @@ function* addPomodoro(action: AddPomodorosRequestAction) {
   }
 }
 
+function* deletePomodoro(action: DeletePomodoroRequestAction) {
+  try {
+    const {id, token} = action;
+    const response = yield call(Http.delete, `/tasks/${id}`, {headers: {
+      token
+    }}) 
+  
+    yield put(deletePomodoroSuccess(response.data));
+  } catch(e) {
+    const message = e.response.data.error || 'Check your internet connection';
+    Alert.alert('Error', message);
+    yield put(deletePomodoroFailure());
+  }
+}
+
 export default all([
   takeLatest(POMODOROS_REQUEST, fetchPomodoros),
   takeLatest(CHANGE_PASSWORD_REQUEST, changePassword),
-  takeLatest(ADD_POMODOROS_REQUEST, addPomodoro)
+  takeLatest(ADD_POMODOROS_REQUEST, addPomodoro),
+  takeLatest(DELETE_POMODORO_REQUEST, deletePomodoro)
 ]);

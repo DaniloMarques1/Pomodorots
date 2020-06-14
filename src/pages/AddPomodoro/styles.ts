@@ -22,7 +22,7 @@ export const Title = styled.Text`
   margin-bottom: 5px;
 `;
 
-export const Form = styled.View`
+export const Form = styled.KeyboardAvoidingView`
   width: 95%;
   height: 320px;
   background-color: ${Colors.PRIMARY_WHITE};
