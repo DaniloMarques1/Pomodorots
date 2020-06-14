@@ -76,7 +76,7 @@ function Route() {
               name = "person-add";
             }
             
-            return <Icon name={name} size={23} color={color} />
+            return <Icon name={name} size={22} color={color} />
           },
         })}
         lazy={true}
@@ -85,7 +85,7 @@ function Route() {
             justifyContent: 'center',
             backgroundColor: Colors.PRIMARY_GREEN,
           },
-          labelStyle: {fontSize: 17},
+          labelStyle: {fontSize: 15},
           activeTintColor: Colors.PRIMARY_RED,
           inactiveTintColor: Colors.PRIMARY_WHITE,
         }}>
