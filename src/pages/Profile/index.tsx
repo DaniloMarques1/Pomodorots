@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Store} from '../../store/modules/types';
 import AsyncStorage from '@react-native-community/async-storage';
 import {logout} from '../../store/modules/Login/action';
+// @ts-ignore
 import TomatoLogo from '../../assets/tomato.png';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -13,6 +14,7 @@ import * as yup from 'yup';
 import {Formik, FormikProps, FormikValues, FormikHelpers} from 'formik';
 import {Colors} from '../../utils';
 import {changePasswordRequest} from '../../store/modules/Pomodoros/action';
+import Loading from '../../components/Loading';
 
 interface FormValues {
   currentPassword: string;
@@ -44,6 +46,7 @@ function Profile() {
 
   return (
     <Container>
+      <Loading loading={state.pomodoroReducer.loading} />
       <Header>
         <Logo source={TomatoLogo} />
         <Title>Hello, {state.pomodoroReducer.name?.split(' ')[0]}!</Title>

@@ -12,6 +12,7 @@ import {
   IconButton,
 } from './styles';
 import {Colors} from '../../utils';
+import {Pomodoro} from '../../store/modules/Pomodoros/reducer';
 
 //TODO: Add events to delete button and play button
 interface CardProps {
@@ -19,9 +20,10 @@ interface CardProps {
   finished: number;
   total: number;
   handleDelete: (id: string) => void;
+  handleTimer: (item: Pomodoro) => void;
 }
 
-function PomodoroCard({title, finished, total, handleDelete}: CardProps) {
+function PomodoroCard({title, finished, total, handleDelete, handleTimer}: CardProps) {
   return (
     <Container>
       <TitleQtdView>
@@ -33,7 +35,7 @@ function PomodoroCard({title, finished, total, handleDelete}: CardProps) {
         </ViewQtd>
       </TitleQtdView>
       <IconView>
-        <IconButton>
+        <IconButton onPress={handleTimer}>
           <Icon name="keyboard-arrow-right" color={Colors.PRIMARY_RED} size={35} />
         </IconButton>
         <IconButton onPress={handleDelete}>

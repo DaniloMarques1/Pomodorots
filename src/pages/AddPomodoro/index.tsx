@@ -7,6 +7,7 @@ import {Store} from '../../store/modules/types';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import ErrorView from '../../components/ErrorView';
+// @ts-ignore
 import TomatoLogo from '../../assets/tomato.png';
 import * as yup from 'yup';
 import {addPomodoroRequest} from '../../store/modules/Pomodoros/action';
