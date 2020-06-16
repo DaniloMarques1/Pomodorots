@@ -12,6 +12,9 @@ import {
   CHANGE_PASSWORD_REQUEST,
   CHANGE_PASSWORD_SUCCESS,
   CHANGE_PASSWORD_FAILURE,
+  UPDATE_POMODORO_REQUEST,
+  UPDATE_POMODORO_SUCCESS,
+  UPDATE_POMODORO_FAILURE
   } from './types';
 import {PomodoroPayload, Pomodoro} from './reducer';
 
@@ -99,3 +102,25 @@ export function deletePomodoroFailure(): PomodoroActions {
     type: DELETE_POMODORO_FAILURE,
   }
 }
+
+export function updatePomodorRequest(id: string, token: string): PomodoroActions {
+  return {
+    type: UPDATE_POMODORO_REQUEST,
+    id,
+    token
+  }
+}
+
+export function updatePomodoroSuccess(pomodoro: Pomodoro): PomodoroActions {
+  return {
+    type: UPDATE_POMODORO_SUCCESS,
+    pomodoro
+  }
+}
+
+export function updatePomodorFailure(): PomodoroActions {
+  return {
+    type: UPDATE_POMODORO_FAILURE,
+  }
+}
+

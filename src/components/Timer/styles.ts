@@ -3,7 +3,7 @@ import {Colors} from '../../utils';
 
 export const Container = styled.View`
   width: 98%;
-  height: 270px;
+  height: 300px;
   background-color: ${Colors.PRIMARY_WHITE};
   border-radius: 10px;
 `;
@@ -45,6 +45,6 @@ export const Minutes = styled.Text`
   font-weight: bold;
 `;
 
-export const IconView = styled.View`
+export const IconView = styled.TouchableOpacity`
   margin-top: 20px;
 `;
