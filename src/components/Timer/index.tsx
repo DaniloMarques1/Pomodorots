@@ -18,6 +18,8 @@ import {Colors, Helper} from '../../utils';
 import {updatePomodorRequest} from '../../store/modules/Pomodoros/action';
 import {useDispatch, useSelector} from 'react-redux';
 import {Store} from '../../store/modules/types';
+import Sound from 'react-native-sound';
+Sound.setCategory('Playback');
 
 interface TimerProps {
   showTimer: boolean;
@@ -25,8 +27,9 @@ interface TimerProps {
   pomodoro?: Pomodoro;
 }
 
-const DEFAULT_TIMER = {minute: 1, second: 0};
-const DEFAULT_BREAK = {minute: 0,  second: 59};
+const DEFAULT_TIMER = {minute: 2, second: 0};
+const DEFAULT_BREAK = {minute: 1,  second: 0};
+const SPEED         = 100;
 
 function Timer(props: TimerProps) {
   const dispatch                        = useDispatch();
@@ -58,23 +61,39 @@ function Timer(props: TimerProps) {
       if (time.minute > 0 || time.second > 0) {
         const intervalId = setInterval(() => {
           setTime((prevState) => ({
-            minute:
-              prevState.second === 59 ? prevState.minute - 1 : prevState.minute,
             second: prevState.second === 0 ? 59 : prevState.second - 1,
+            minute:
+              prevState.second === 0 ? prevState.minute - 1 : prevState.minute,
           }));
-        }, 100);
+        }, SPEED);
 
         return () => clearInterval(intervalId);
       } else {
         if (!breakTime) {
-          if (props.pomodoro && token)
-            dispatch(updatePomodorRequest(props.pomodoro._id, token));
+          if (props.pomodoro && token) {
+            if (props.pomodoro.finishedPomodoros < props.pomodoro.qtdPomodoros) {
+              dispatch(updatePomodorRequest(props.pomodoro._id, token));
+              props.pomodoro.finishedPomodoros++;
+            }
+          }
+        } else {
+          if (props.pomodoro) {
+            if (props.pomodoro.finishedPomodoros === props.pomodoro.qtdPomodoros)
+              handleCloseTimer();
+          }
         }
-
+      
         setBreakTime(prevState => !prevState);
         setTime(!breakTime ? DEFAULT_BREAK : DEFAULT_TIMER);
         setClockRunning(false);
         setIconName('play-arrow');
+        //play audio
+        const bell = new Sound("alarm.mp3", Sound.MAIN_BUNDLE, (err) => {
+          if (err)
+            console.log("Erro playing the audio");
+
+          bell.play();
+        });
       }
     }
   }, [clockRunning, time])

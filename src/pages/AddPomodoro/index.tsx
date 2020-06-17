@@ -41,7 +41,9 @@ function AddPomodoro() {
       </Header>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values: FormikValues, helpers: FormikHelpers<FormValues>) => handleCreate(values, helpers)}
+        onSubmit={(values: FormikValues, helpers: FormikHelpers<FormValues>) =>
+          handleCreate(values, helpers)
+        }
         validateOnMount={false}
         validateOnChange={false}
         validationSchema={validationForm}>
@@ -70,7 +72,11 @@ function AddPomodoro() {
               <ErrorView error={props.errors.qtdPomodoros} />
             </InputView>
             <ButtonView>
-              <Button label="Create" onPress={props.handleSubmit} />
+              <Button
+                label="Create"
+                onPress={props.handleSubmit}
+                loading={state.pomodoroReducer.loading}
+              />
             </ButtonView>
           </Form>
         )}

@@ -1,7 +1,9 @@
 import styled from 'styled-components/native';
 import {Colors} from '../../utils';
 
-export const Container = styled.KeyboardAvoidingView`
+export const Container = styled.KeyboardAvoidingView.attrs(() => ({
+  behavior: 'height'
+}))`
   background-color: ${Colors.PRIMARY_WHITE};
   flex: 1;
   padding: 60px 20px 0px 20px;
