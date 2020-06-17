@@ -27,9 +27,9 @@ interface TimerProps {
   pomodoro?: Pomodoro;
 }
 
-const DEFAULT_TIMER = {minute: 2, second: 0};
-const DEFAULT_BREAK = {minute: 1,  second: 0};
-const SPEED         = 100;
+const DEFAULT_TIMER = {minute: 25, second: 0};
+const DEFAULT_BREAK = {minute: 5,  second: 0};
+const SPEED         = 1000;
 
 function Timer(props: TimerProps) {
   const dispatch                        = useDispatch();

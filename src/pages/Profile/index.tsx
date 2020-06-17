@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Store} from '../../store/modules/types';
 import AsyncStorage from '@react-native-community/async-storage';
 import {logout} from '../../store/modules/Login/action';
+import {logoutPomodoro} from '../../store/modules/Pomodoros/action';
 // @ts-ignore
 import TomatoLogo from '../../assets/tomato.png';
 import Input from '../../components/Input';
@@ -29,6 +30,7 @@ function Profile() {
   async function handleLogout() {
     await AsyncStorage.removeItem("pomodoro");
     dispatch(logout());
+    dispatch(logoutPomodoro());
     //TODO: dispatch um pomodoro clear
   }
 

@@ -14,7 +14,8 @@ import {
   DELETE_POMODORO_FAILURE,
   UPDATE_POMODORO_REQUEST,
   UPDATE_POMODORO_SUCCESS,
-  UPDATE_POMODORO_FAILURE
+  UPDATE_POMODORO_FAILURE,
+  LOGOUT
 } from './types';
 
 export interface Pomodoro {
@@ -89,7 +90,6 @@ export default function reducer(state = initialState, action: PomodoroActions): 
       return {...state, loading: false};
     }
     case UPDATE_POMODORO_REQUEST: {
-      console.log("Request");
       return {...state, loading: true};
     }
     case UPDATE_POMODORO_SUCCESS: {
@@ -107,8 +107,10 @@ export default function reducer(state = initialState, action: PomodoroActions): 
       return  {...state, loading: false, tasks: nTasks};
     }
     case UPDATE_POMODORO_FAILURE: {
-      console.log("Falha");
       return {...state, loading: false};
+    }
+    case LOGOUT: {
+      return initialState;
     }
     default:
       return state;

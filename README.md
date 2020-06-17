@@ -16,3 +16,6 @@ Ao criar uma tarefa (task) decidimos quantos pomodoros vamos dedicar para aquela
 ## TODO
 
 [ ] - Melhorar os formularios (keyboard/tab overlap)
+
+## Demonstração
+<img src="pomodoro.gif" width="320" height="500" />

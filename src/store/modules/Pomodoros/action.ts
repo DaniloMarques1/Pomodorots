@@ -14,7 +14,8 @@ import {
   CHANGE_PASSWORD_FAILURE,
   UPDATE_POMODORO_REQUEST,
   UPDATE_POMODORO_SUCCESS,
-  UPDATE_POMODORO_FAILURE
+  UPDATE_POMODORO_FAILURE,
+  LOGOUT
   } from './types';
 import {PomodoroPayload, Pomodoro} from './reducer';
 
@@ -123,4 +124,11 @@ export function updatePomodorFailure(): PomodoroActions {
     type: UPDATE_POMODORO_FAILURE,
   }
 }
+
+export function logoutPomodoro(): PomodoroActions {
+  return {
+    type: LOGOUT
+  }
+}
+
 
