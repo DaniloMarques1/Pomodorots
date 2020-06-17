@@ -12,3 +12,7 @@ Ao criar uma tarefa (task) decidimos quantos pomodoros vamos dedicar para aquela
 * Logar
 * Adicionar uma nova tarefa 
 * Completar pomodoro(s)
+
+## TODO
+
+[ ] - Melhorar os formularios (keyboard/tab overlap)
