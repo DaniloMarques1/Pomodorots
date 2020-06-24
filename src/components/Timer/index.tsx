@@ -18,6 +18,7 @@ import {Colors, Helper} from '../../utils';
 import {updatePomodorRequest} from '../../store/modules/Pomodoros/action';
 import {useDispatch, useSelector} from 'react-redux';
 import {Store} from '../../store/modules/types';
+import { useKeepAwake } from 'expo-keep-awake';
 import Sound from 'react-native-sound';
 Sound.setCategory('Playback');
 
@@ -38,6 +39,7 @@ function Timer(props: TimerProps) {
   const [clockRunning, setClockRunning] = useState(false);
   const [iconName, setIconName]         = useState("play-arrow");
   const [breakTime, setBreakTime]       = useState(false);
+  
   
   function formatTime(): string {
     return `${Helper.padLeft(time.minute.toString())}:${Helper.padLeft(time.second.toString())}`;
@@ -97,6 +99,9 @@ function Timer(props: TimerProps) {
       }
     }
   }, [clockRunning, time])
+
+  // keep phone open while
+  useKeepAwake(); 
 
   return (
     <Modal
