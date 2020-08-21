@@ -7,6 +7,11 @@ class Helper {
 
     return str;
   }
+
+  static formatTime(minute: string, second: string): string {
+    return `${Helper.padLeft(minute.toString())}:${Helper.padLeft(second.toString())}`;
+  }
+
 }
 
 export default Helper;

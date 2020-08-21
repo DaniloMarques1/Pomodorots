@@ -11,6 +11,7 @@ import {
   Minutes,
   IconView,
 } from './styles';
+
 import Modal from 'react-native-modal';
 import {Pomodoro} from '../../store/modules/Pomodoros/reducer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -18,7 +19,7 @@ import {Colors, Helper} from '../../utils';
 import {updatePomodorRequest} from '../../store/modules/Pomodoros/action';
 import {useDispatch, useSelector} from 'react-redux';
 import {Store} from '../../store/modules/types';
-import { useKeepAwake } from 'expo-keep-awake';
+import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 import Sound from 'react-native-sound';
 Sound.setCategory('Playback');
 
@@ -36,14 +37,16 @@ function Timer(props: TimerProps) {
   const dispatch                        = useDispatch();
   const token                           = useSelector((state: Store) => state.loginReducer.token);
   const [time, setTime]                 = useState(DEFAULT_TIMER);
-  const [clockRunning, setClockRunning] = useState(false);
   const [iconName, setIconName]         = useState("play-arrow");
+  const [clockRunning, setClockRunning] = useState(false);
   const [breakTime, setBreakTime]       = useState(false);
   
   
+  /*
   function formatTime(): string {
     return `${Helper.padLeft(time.minute.toString())}:${Helper.padLeft(time.second.toString())}`;
   }
+   */
 
   function handleClockStatus() {
     setClockRunning(prevState => !prevState);
@@ -100,8 +103,14 @@ function Timer(props: TimerProps) {
     }
   }, [clockRunning, time])
 
-  // keep phone open while
-  useKeepAwake(); 
+
+  useEffect(() => {
+    if (clockRunning) {
+      activateKeepAwake();
+    } else {
+      deactivateKeepAwake();
+    }
+  }, [clockRunning]) 
 
   return (
     <Modal
@@ -120,7 +129,7 @@ function Timer(props: TimerProps) {
           </PomodoroStatus>
         </Header>
         <Body>
-          <Minutes>{formatTime()}</Minutes>
+          <Minutes>{Helper.formatTime(time.minute.toString(), time.second.toString())}</Minutes>
           <IconView onPress={handleClockStatus}>
             <Icon name={iconName} size={25} color={Colors.PRIMARY_RED} />
           </IconView>
