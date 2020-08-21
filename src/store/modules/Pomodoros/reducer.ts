@@ -39,58 +39,61 @@ export interface PomodoroPayload {
 }
 
 export interface StateInterface extends PomodoroPayload {
-  loading: boolean;
+  addLoading: boolean;
+  changePasswordLoading: boolean;
+  deleteLoading: boolean;
+  getPomodoroLoading: boolean;
 }
 
-const initialState: StateInterface = {loading: false};
+const initialState: StateInterface = {addLoading: false, changePasswordLoading: false, deleteLoading: false, getPomodoroLoading: false};
 
 export default function reducer(state = initialState, action: PomodoroActions): StateInterface {
   switch (action.type) {
     case POMODOROS_REQUEST: {
-      return {...state, loading:true};
+      return {...state, getPomodoroLoading:true};
     }
     case POMODOROS_FAILURE: {
-      return {...state, loading: false};
+      return {...state, getPomodoroLoading: false};
     }
     case POMODOROS_SUCCESS: {
-      return {...action.payload, loading: false};
+      return {...action.payload, ...state, getPomodoroLoading: false};
     }
     case ADD_POMODOROS_REQUEST: {
-      return {...state, loading: true};
+      return {...state, addLoading: true};
     }
     case ADD_POMODOROS_SUCCESS: {
       const tasks = state.tasks?.slice(0);
       tasks?.push(action.pomodoro);
 
-      return {...state, loading: false, tasks};
+      return {...state, addLoading: false, tasks};
     }
     case ADD_POMODOROS_FAILURE: {
-      return {...state, loading: false};
+      return {...state, addLoading: false};
     }
     case CHANGE_PASSWORD_REQUEST: {
-      return {...state, loading: true};
+      return {...state, changePasswordLoading: true};
     }
     case CHANGE_PASSWORD_SUCCESS: {
-      return {loading: false, ...action.payload};
+      return {...state, changePasswordLoading: false, ...action.payload};
     }
     case CHANGE_PASSWORD_FAILURE: {
-      return {...state, loading: false};
+      return {...state, changePasswordLoading: false};
     }
     case DELETE_POMODORO_REQUEST: {
-      return {...state, loading: true};
+      return {...state, deleteLoading: true};
     }
     case DELETE_POMODORO_SUCCESS: {
       return {
         ...state,
-        loading: false,
+        deleteLoading: false,
         tasks: state.tasks?.filter(task => task._id !== action.pomodoro._id)
       }; 
     }
     case DELETE_POMODORO_FAILURE: {
-      return {...state, loading: false};
+      return {...state, deleteLoading: false};
     }
     case UPDATE_POMODORO_REQUEST: {
-      return {...state, loading: true};
+      return {...state, getPomodoroLoading: true};
     }
     case UPDATE_POMODORO_SUCCESS: {
       let nTasks;
@@ -104,10 +107,10 @@ export default function reducer(state = initialState, action: PomodoroActions): 
         });
       }
       
-      return  {...state, loading: false, tasks: nTasks};
+      return  {...state, getPomodoroLoading: false, tasks: nTasks};
     }
     case UPDATE_POMODORO_FAILURE: {
-      return {...state, loading: false};
+      return {...state, getPomodoroLoading: false};
     }
     case LOGOUT: {
       return initialState;

@@ -7,14 +7,16 @@ export interface ButtonProps {
   backgroundColor?: string;
   labelColor?: string;
   loading?: boolean;
+  disable?: boolean;
   onPress: () => void;
 }
 
-//TODO: Como controlar o loading (acivity indicator)
-function Button({label, backgroundColor, labelColor, loading, onPress}: ButtonProps) {
+function Button({disable, label, backgroundColor, labelColor, loading, onPress}: ButtonProps) {
+  disable = disable ? disable : false;
   return (
     <ButtonComponent
       backgroundColor={backgroundColor}
+      disabled={disable}
       onPress={onPress}
     >
     {loading && (
