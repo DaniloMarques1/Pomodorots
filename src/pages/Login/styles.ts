@@ -10,15 +10,15 @@ export const Container = styled.KeyboardAvoidingView.attrs(() => ({
 `;
 
 export const Logo = styled.Image`
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   align-self: center;
 `;
 
 export const ViewInput = styled.View`
-  margin: 10px 0;
+  margin: 5px 0;
 `;
 
 export const ViewButton = styled.View`
-  margin-top: 15px;
+  margin-top: 10px;
 `;

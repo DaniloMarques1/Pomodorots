@@ -1,12 +1,12 @@
 import React from 'react';
 
-import {Container, Logo, ViewInput, ViewButton} from './styles';
+import {Container, Logo, ViewInput, ViewButton, Form} from './styles';
+//@ts-ignore
 import TomatoLogo from '../../assets/tomato.png';
 import {Formik, FormikValues, FormikProps, FormikHelpers} from 'formik';
 import ErrorView from '../../components/ErrorView';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import {Colors} from '../../utils';
 import * as yup from 'yup';
 import {RegisterProps} from '../../routes';
 import {Http} from '../../services/http';
@@ -59,8 +59,7 @@ function Register(props: RegisterProps) {
   });
 
   return (
-    <Container keyboardVerticalOffset={500}>
-      <Logo source={TomatoLogo} />
+    <Container>
       <Formik
         initialValues={initialValues}
         onSubmit={(values: FormikValues, helpers: FormikHelpers<FormValues>) => handleRegister(values, helpers)}
@@ -69,7 +68,8 @@ function Register(props: RegisterProps) {
         validationSchema={validationForm}
         >
         {(props: FormikProps<FormValues>) => (
-          <>
+          <Form>
+            <Logo source={TomatoLogo} />
             <ViewInput>
               <Input
                 error={!!props.errors.name}
@@ -119,7 +119,7 @@ function Register(props: RegisterProps) {
                 loading={loading}
               />
             </ViewButton>
-          </>
+          </Form>
         )}
       </Formik>
     </Container>

@@ -10,7 +10,6 @@ import { Provider } from 'react-redux';
 import store from './store/index';
 
 const App = () => {
-  //TODO: fix this
 return (
     <>
       <StatusBar backgroundColor={Colors.PRIMARY_RED} />

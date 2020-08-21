@@ -1,24 +1,26 @@
 import styled from 'styled-components/native';
 import {Colors} from '../../utils';
 
-export const Container = styled.KeyboardAvoidingView.attrs(() => ({
-  behavior: 'height'
-}))`
+export const Container = styled.View`
   background-color: ${Colors.PRIMARY_WHITE};
-  padding: 10px 20px;
+  padding: 5px 10px;
   flex: 1;
 `;
 
 export const Logo = styled.Image`
   align-self: center;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
 `;
 
 export const ViewInput = styled.View`
-  margin: 7px 0;
+  margin: 5px 0;
 `;
 
 export const ViewButton = styled.View`
-  margin-top: 10px;
+  margin-top: 8px;
+`;
+
+export const Form = styled.ScrollView`
+  flex: 1;
 `;
