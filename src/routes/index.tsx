@@ -21,6 +21,7 @@ import Register      from '../pages/Register';
 import Home          from '../pages/Home';
 import Profile       from '../pages/Profile';
 import AddPomodoro   from '../pages/AddPomodoro';
+import LooseTimer    from '../pages/LooseTimer';
 
 type TabProps = {
   Login: LoginParams;
@@ -28,6 +29,7 @@ type TabProps = {
   Home: undefined;
   Profile: undefined;
   AddPomodoro: undefined;
+  LooseTimer: undefined;
 }
 
 export type LoginProps    = BottomTabScreenProps<TabProps, "Login">;
@@ -72,6 +74,8 @@ function Route() {
               name = "note-add";
             } else if (route.name === "Login") {
               name = "person";
+            } else if(route.name === "LooseTimer"){
+              name = "timer";
             } else {
               name = "person-add";
             }
@@ -99,6 +103,7 @@ function Route() {
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Profile" component={Profile} />
             <Tab.Screen name="AddPomodoro" component={AddPomodoro} options={() => ({title: "Add"})} />
+            <Tab.Screen name="LooseTimer" component={LooseTimer} options={() => ({title: "Timer"})} />
           </>
         )}
       </Tab.Navigator>
