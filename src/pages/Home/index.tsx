@@ -20,7 +20,6 @@ function HeaderComponent() {
   );
 }
 
-//TODO: Loading vai aparecer em qualquer tela caso o loading seja alterado
 function Home() {
   const dispatch = useDispatch();
   const state    = useSelector((state: Store) => state);
@@ -63,7 +62,7 @@ function Home() {
         data={state.pomodoroReducer.tasks}
         keyExtractor={(item) => item._id }
         ListHeaderComponent={HeaderComponent}
-        refreshing={state.pomodoroReducer.loading}
+        refreshing={state.pomodoroReducer.getPomodoroLoading || state.pomodoroReducer.deleteLoading}
         onRefresh={handleRefresh}
         renderItem={({item}) => (
           <PomodoroCard

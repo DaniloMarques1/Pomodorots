@@ -114,6 +114,7 @@ function Register(props: RegisterProps) {
             </ViewInput>
             <ViewButton>
               <Button
+                disable={loading}
                 label="Register"
                 onPress={props.handleSubmit}
                 loading={loading}

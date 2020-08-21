@@ -11,6 +11,7 @@ import ErrorView from '../../components/ErrorView';
 import TomatoLogo from '../../assets/tomato.png';
 import * as yup from 'yup';
 import {addPomodoroRequest} from '../../store/modules/Pomodoros/action';
+import Loading from '../../components/Loading';
 
 interface FormValues {
   title: string;
@@ -23,7 +24,6 @@ function AddPomodoro() {
   const dispatch                  = useDispatch();
 
   function handleCreate(values: FormikValues, helpers: FormikHelpers<FormValues>) {
-    //TODO: dispatch a create action
     helpers.resetForm({});
     if (state.loginReducer.token)
       dispatch(addPomodoroRequest(state.loginReducer.token, values.title, values.qtdPomodoros));
@@ -36,6 +36,7 @@ function AddPomodoro() {
 
   return (
     <Container>
+      <Loading loading={state.pomodoroReducer.addLoading} />
       <Header>
         <Logo source={TomatoLogo} />
       </Header>
@@ -75,7 +76,6 @@ function AddPomodoro() {
               <Button
                 label="Create"
                 onPress={props.handleSubmit}
-                loading={state.pomodoroReducer.loading}
               />
             </ButtonView>
           </Form>

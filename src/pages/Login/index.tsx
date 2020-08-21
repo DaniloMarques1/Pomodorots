@@ -76,6 +76,7 @@ function Login(props: LoginProps) {
             </ViewInput>
             <ViewButton>
               <Button
+                disable={state.loading}
                 label="Login"
                 onPress={props.handleSubmit}
                 loading={state.loading}

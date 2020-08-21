@@ -15,7 +15,7 @@ import * as yup from 'yup';
 import {Formik, FormikProps, FormikValues, FormikHelpers} from 'formik';
 import {Colors} from '../../utils';
 import {changePasswordRequest} from '../../store/modules/Pomodoros/action';
-//import Loading from '../../components/Loading';
+import Loading from '../../components/Loading';
 
 interface FormValues {
   currentPassword: string;
@@ -31,7 +31,6 @@ function Profile() {
     await AsyncStorage.removeItem("pomodoro");
     dispatch(logout());
     dispatch(logoutPomodoro());
-    //TODO: dispatch um pomodoro clear
   }
 
   function handleChangePassword(values: FormikValues, helpers: FormikHelpers<FormValues>) {
@@ -48,6 +47,7 @@ function Profile() {
 
   return (
     <Container>
+      <Loading loading={state.pomodoroReducer.changePasswordLoading} />
       <Header>
         <Logo source={TomatoLogo} />
         <Title>Hello, {state.pomodoroReducer.name?.split(' ')[0]}!</Title>
@@ -90,7 +90,6 @@ function Profile() {
               <Button
                 label="Change password"
                 onPress={props.handleSubmit}
-                loading={state.pomodoroReducer.loading}
               />
             </ViewButton>
             <ViewButton>
