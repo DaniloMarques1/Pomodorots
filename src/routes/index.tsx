@@ -12,6 +12,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Store} from '../store/modules/types';
 import {loginSuccess} from '../store/modules/Login/action';
 import {pomodoroRequest} from '../store/modules/Pomodoros/action';
+import {setTime} from '../store/modules/Timer/actions';
+import {PomodoroTime} from '../store/modules/Timer/types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 /* Pages */
@@ -29,7 +31,7 @@ type TabProps = {
   Home: undefined;
   Profile: undefined;
   AddPomodoro: undefined;
-  LooseTimer: undefined;
+ LooseTimer: undefined;
 }
 
 export type LoginProps    = BottomTabScreenProps<TabProps, "Login">;
@@ -39,12 +41,23 @@ const Tab = createBottomTabNavigator<TabProps>();
 
 function Route() {
   const dispatch = useDispatch(); // fazer o dispatch do login e de consulta de pomodoros
-  const state    = useSelector((state: Store) => state.loginReducer);
+  const state    = useSelector((state: Store) => state);
   const [ready, setReady] = React.useState(false);
 
   React.useEffect(() => {
     async function getToken() {
       const token = await AsyncStorage.getItem('pomodoro');
+      const timeStr = await AsyncStorage.getItem('pomodoroTimer');
+      let time: PomodoroTime;
+      
+      if (!timeStr) {
+        time = {pomodoroTime: {minute: 25, second: 0}, breakTime: {minute: 5, second: 0}};
+      } else {
+        time = JSON.parse(timeStr);
+      }
+
+      dispatch(setTime(time));
+
       setReady(true);
       if (token) {
         dispatch(loginSuccess(token));
@@ -93,7 +106,7 @@ function Route() {
           activeTintColor: Colors.PRIMARY_RED,
           inactiveTintColor: Colors.PRIMARY_WHITE,
         }}>
-        {state.token === null ? (
+        {state.loginReducer.token === null ? (
           <>
             <Tab.Screen name="Login" component={Login} />
             <Tab.Screen name="Register" component={Register} />

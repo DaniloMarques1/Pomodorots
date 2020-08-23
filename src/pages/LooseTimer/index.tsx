@@ -18,14 +18,18 @@ import {Helper, Colors} from '../../utils';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Sound from 'react-native-sound';
 Sound.setCategory('Playback');
+import {useSelector} from 'react-redux';
+import {Store} from '../../store/modules/types';
 
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 
-const DEFAULT_TIMER = {minute: 25, second: 0};
-const DEFAULT_BREAK = {minute: 5,  second: 0};
-const SPEED         = 1000;
 
 function LooseTimer() {
+  const state         = useSelector((state: Store) => state);
+  const DEFAULT_TIMER = state.timeState.timer.pomodoroTime;
+  const DEFAULT_BREAK = state.timeState.timer.breakTime;
+  const SPEED         = 10;
+
   const [time, setTime] = useState(DEFAULT_TIMER);
   const [iconName, setIconName] = useState("play-arrow");
   const [clockRunning, setClockRunning] = useState(false);
@@ -51,6 +55,12 @@ function LooseTimer() {
       deactivateKeepAwake();
     }
   }, [clockRunning]) 
+
+  useEffect(() => {
+    // will only change if there is a rerender because of the timer
+    // state changing from the profile page
+    setTime(DEFAULT_TIMER);
+  }, [DEFAULT_TIMER]);
 
   useEffect(() => {
     if (clockRunning) {

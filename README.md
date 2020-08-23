@@ -15,7 +15,11 @@ Ao criar uma tarefa (task) decidimos quantos pomodoros vamos dedicar para aquela
 
 ## TODO
 
-[ ] - Melhorar os formularios (keyboard/tab overlap)
+* [X] - Melhorar os formularios (keyboard/tab overlap, adicionar scrollView no form de registro)
+* [ ] - Poder aumentar o timer/break do pomodoro na tela de perfil (o padrao eh 25 minutos/5)
+* [X] - poder realizar um timer independente de uma atividade. Ou seja, poder fazer um pomodoro que nao esteja vinculado a nenhuma atividade (adicionar novo item no bottom menu "Pomodoro")
+* [X] - Ajustar o keepawake para ele acontecer apenas na tela do timer.
+* [X] - Ajustar para que cada acao de comunicao com o servidor tenha seu "loading" no redux
 
 ## Demonstração
 <img src="pomodoro.gif" width="320" height="500" />

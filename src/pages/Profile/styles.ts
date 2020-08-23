@@ -4,30 +4,30 @@ import {Colors} from '../../utils';
 export const Container = styled.View`
   flex: 1;
   background-color: ${Colors.PRIMARY_RED};
-  align-items: center;
 `;
 
 export const Header = styled.View`
-  margin: 20px 0;
+  margin: 5px 0;
 `;
 
 export const Logo = styled.Image`
-  width: 50px;
-  height: 50px;
-  margin-bottom: 20px;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 3px;
   align-self: center;
 `;
 
 export const Title = styled.Text`
   color: ${Colors.PRIMARY_WHITE};
   font-size: 18px;
+  align-self: center;
 `;
 
-export const Form = styled.KeyboardAvoidingView`
+export const Form = styled.View`
   background-color: ${Colors.PRIMARY_WHITE};
+  border-radius: 12px;
   width: 90%;
-  height: 370px;
-  border-radius: 20px;
+  margin: 10px 0;
   padding: 12px;
 `;
 

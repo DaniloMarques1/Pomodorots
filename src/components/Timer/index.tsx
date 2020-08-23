@@ -29,18 +29,27 @@ interface TimerProps {
   pomodoro?: Pomodoro;
 }
 
-const DEFAULT_TIMER = {minute: 25, second: 0};
-const DEFAULT_BREAK = {minute: 5,  second: 0};
-const SPEED         = 1000;
-
 function Timer(props: TimerProps) {
   const dispatch                        = useDispatch();
-  const token                           = useSelector((state: Store) => state.loginReducer.token);
+  const state                           = useSelector((state: Store) => state);
+
+
+  const DEFAULT_TIMER = state.timeState.timer.pomodoroTime;
+  const DEFAULT_BREAK = state.timeState.timer.breakTime;
+  const SPEED         = 10;
+
+
+  const token = state.loginReducer.token;
   const [time, setTime]                 = useState(DEFAULT_TIMER);
   const [iconName, setIconName]         = useState("play-arrow");
   const [clockRunning, setClockRunning] = useState(false);
   const [breakTime, setBreakTime]       = useState(false);
   
+  useEffect(() => {
+    // will only change if there is a rerender because of the timer
+    // state changing from the profile page
+    setTime(DEFAULT_TIMER);
+  }, [DEFAULT_TIMER]);
   
   /*
   function formatTime(): string {
