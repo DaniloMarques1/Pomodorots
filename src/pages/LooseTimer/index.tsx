@@ -28,7 +28,7 @@ function LooseTimer() {
   const state         = useSelector((state: Store) => state);
   const DEFAULT_TIMER = state.timeState.timer.pomodoroTime;
   const DEFAULT_BREAK = state.timeState.timer.breakTime;
-  const SPEED         = 10;
+  const SPEED         = 1000;
 
   const [time, setTime] = useState(DEFAULT_TIMER);
   const [iconName, setIconName] = useState("play-arrow");
@@ -90,7 +90,6 @@ function LooseTimer() {
     }
   }, [clockRunning, time])
 
-
   return (
     <Container>
       <Body>
@@ -112,9 +111,6 @@ function LooseTimer() {
       </Body>
     </Container>
   );
-
 }
 
 export default LooseTimer;
-
-

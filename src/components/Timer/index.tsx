@@ -36,7 +36,7 @@ function Timer(props: TimerProps) {
 
   const DEFAULT_TIMER = state.timeState.timer.pomodoroTime;
   const DEFAULT_BREAK = state.timeState.timer.breakTime;
-  const SPEED         = 10;
+  const SPEED         = 1000;
 
 
   const token = state.loginReducer.token;

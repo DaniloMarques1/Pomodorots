@@ -1,23 +1,32 @@
 import React from 'react';
 
-import {Container, Title, Header, Logo, Form, Label, ViewInput, ViewButton} from './styles';
-import {useSelector, useDispatch} from 'react-redux';
-import {Store} from '../../store/modules/types';
+import {
+  Container,
+  Title,
+  Header,
+  Logo,
+  Form,
+  Label,
+  ViewInput,
+  ViewButton,
+} from './styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { Store } from '../../store/modules/types';
 import AsyncStorage from '@react-native-community/async-storage';
-import {logout} from '../../store/modules/Login/action';
-import {logoutPomodoro} from '../../store/modules/Pomodoros/action';
+import { logout } from '../../store/modules/Login/action';
+import { logoutPomodoro } from '../../store/modules/Pomodoros/action';
 // @ts-ignore
 import TomatoLogo from '../../assets/tomato.png';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import ErrorView from '../../components/ErrorView';
 import * as yup from 'yup';
-import {Formik, FormikProps, FormikValues, FormikHelpers} from 'formik';
-import {Colors} from '../../utils';
-import {changePasswordRequest} from '../../store/modules/Pomodoros/action';
-import {updateTime} from '../../store/modules/Timer/actions';
+import { Formik, FormikProps, FormikValues, FormikHelpers } from 'formik';
+import { Colors } from '../../utils';
+import { changePasswordRequest } from '../../store/modules/Pomodoros/action';
+import { updateTime } from '../../store/modules/Timer/actions';
 import Loading from '../../components/Loading';
-import {ScrollView} from 'react-native';
+import { ScrollView } from 'react-native';
 
 interface ChangePasswordForm {
   currentPassword: string;
@@ -30,38 +39,74 @@ interface ChangePomodoroMinuteForm {
 }
 
 function Profile() {
-  const state    = useSelector((state: Store) => state);
-  const dispatch =  useDispatch();
-  const changePasswordForm: ChangePasswordForm = {newPassword: "", currentPassword: ""};
-  const changeMinute: ChangePomodoroMinuteForm = {pomodoroMinutes: "", breakMinutes: ""};
+  const state = useSelector((state: Store) => state);
+  const dispatch = useDispatch();
+  const changePasswordForm: ChangePasswordForm = {
+    newPassword: '',
+    currentPassword: '',
+  };
+  const changeMinute: ChangePomodoroMinuteForm = {
+    pomodoroMinutes: '',
+    breakMinutes: '',
+  };
 
   async function handleLogout() {
-    await AsyncStorage.removeItem("pomodoro");
+    await AsyncStorage.removeItem('pomodoro');
     dispatch(logout());
     dispatch(logoutPomodoro());
   }
 
-  function handleChangePassword(values: FormikValues, helpers: FormikHelpers<ChangePasswordForm>) {
+  function handleChangePassword(
+    values: FormikValues,
+    helpers: FormikHelpers<ChangePasswordForm>,
+  ) {
     if (state.loginReducer.token)
-      dispatch(changePasswordRequest(values.currentPassword, values.newPassword, state.loginReducer.token));
+      dispatch(
+        changePasswordRequest(
+          values.currentPassword,
+          values.newPassword,
+          state.loginReducer.token,
+        ),
+      );
 
     helpers.resetForm({});
   }
-  
-  function handleUpdateTimer(values: FormikValues) {
+
+  function handleUpdateTimer(
+    values: FormikValues,
+    helpers: FormikHelpers<ChangePomodoroMinuteForm>,
+  ) {
     //TODO: dispatch setTime
-    const time = {pomodoroTime: {minute: Number(values.pomodoroMinutes), second: 0}, breakTime: {minute: Number(values.breakMinutes), second: 0}};
+    const time = {
+      pomodoroTime: { minute: Number(values.pomodoroMinutes), second: 0 },
+      breakTime: { minute: Number(values.breakMinutes), second: 0 },
+    };
     dispatch(updateTime(time));
+    helpers.resetForm({});
   }
 
   const validateChangePassword = yup.object().shape({
-    currentPassword: yup.string().min(6, "Password must have at least 6 characteres").required("Field is required"),
-    newPassword: yup.string().min(6, "Password must have at least 6 characteres").required("Field is required"),
+    currentPassword: yup
+      .string()
+      .min(6, 'Password must have at least 6 characteres')
+      .required('Field is required'),
+    newPassword: yup
+      .string()
+      .min(6, 'Password must have at least 6 characteres')
+      .required('Field is required'),
   });
 
   const validateChangeMinute = yup.object().shape({
-    pomodoroMinutes: yup.number().typeError("Must be a number").min(20, "A pomodoro must have at least 20 minutes").required("Field required"),
-    breakMinutes: yup.number().typeError("Must be a number").min(5, "A pomodoro break must have at least 5 minutes").required("Field required")
+    pomodoroMinutes: yup
+      .number()
+      .typeError('Must be a number')
+      .min(20, 'A pomodoro must have at least 20 minutes')
+      .required('Field required'),
+    breakMinutes: yup
+      .number()
+      .typeError('Must be a number')
+      .min(5, 'A pomodoro break must have at least 5 minutes')
+      .required('Field required'),
   });
 
   return (
@@ -71,15 +116,17 @@ function Profile() {
         <Logo source={TomatoLogo} />
         <Title>Hello, {state.pomodoroReducer.name?.split(' ')[0]}!</Title>
       </Header>
-      <ScrollView contentContainerStyle={{alignItems: 'center'}} >
+      <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
         <Form>
           <Formik
             initialValues={changeMinute}
-            onSubmit={(values) => handleUpdateTimer(values)}
+            onSubmit={(
+              values,
+              helpers: FormikHelpers<ChangePomodoroMinuteForm>,
+            ) => handleUpdateTimer(values, helpers)}
             validateOnMount={false}
             validateOnChange={false}
-            validationSchema={validateChangeMinute}
-          >
+            validationSchema={validateChangeMinute}>
             {(props: FormikProps<ChangePomodoroMinuteForm>) => (
               <>
                 <ViewInput>
